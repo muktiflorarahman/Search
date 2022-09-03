@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1661935360 source:/home/mukti/CodeBlocks/Search/src/BinarySearchTree.cpp
+	<iostream>
+	<cstdlib>
+	"BinarySearchTree.h"
+
+1660202848 /home/mukti/CodeBlocks/Search/include/BinarySearchTree.h
+
+1662189852 source:/home/mukti/CodeBlocks/Search/src/HashTable.cpp
+	"HashTable.h"
+	<iostream>
+
+1660202881 /home/mukti/CodeBlocks/Search/include/HashTable.h
+	<cstddef>
+	<vector>
+
+1660203055 source:/home/mukti/CodeBlocks/Search/src/Primes.cpp
+	"Primes.h"
+	<memory>
+	<array>
+
+1660202904 /home/mukti/CodeBlocks/Search/include/Primes.h
+	<cstddef>
+
+1662192139 source:/home/mukti/CodeBlocks/Search/src/Results.cpp
+	"Results.h"
+	<iostream>
+	<cmath>
+	<fstream>
+	<iomanip>
+
+1660204821 /home/mukti/CodeBlocks/Search/include/Results.h
+	<vector>
+	"Enums.h"
+
+1660202976 /home/mukti/CodeBlocks/Search/include/Enums.h
+
+1662195564 source:/home/mukti/CodeBlocks/Search/src/SearchAlgorithms.cpp
+	"SearchAlgorithms.h"
+	<random>
+	<algorithm>
+	<cmath>
+	<ctime>
+	<iostream>
+	<chrono>
+
+1662189998 /home/mukti/CodeBlocks/Search/include/SearchAlgorithms.h
+	"HashTable.h"
+	"BinarySearchTree.h"
+	"Results.h"
+	<chrono>
+
+1662196617 source:/home/mukti/CodeBlocks/Search/main.cpp
+	<iostream>
+	"BinarySearchTree.h"
+	"HashTable.h"
+	"Primes.h"
+	"Enums.h"
+	"SearchAlgorithms.h"
+	"Results.h"
+	<vector>
+
