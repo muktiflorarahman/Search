@@ -15,7 +15,7 @@ Primes::Primes(size_t arraySize)
     Eratosthenes();
 }
 
-void Primes::fillArray(size_t arrayToBeFilled[], size_t numberOfPrimes)
+void Primes::fill_array(size_t arrayToBeFilled[], size_t numberOfPrimes)
 {
     size_t pos = 0;
 

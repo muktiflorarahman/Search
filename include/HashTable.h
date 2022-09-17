@@ -12,12 +12,14 @@ public:
     HashTable(size_t);
     ~HashTable();
 
-    void init_table();
+    void rehash_table( size_t );
     void delete_table();
     void delete_bucket(size_t);
 
-    void set_table_size(size_t);
-    size_t create_hash(size_t);
+    size_t get_table_size();
+    void set_table_size( size_t );
+
+    size_t create_hash( size_t );
 
     void add_values(size_t[], size_t, size_t);
     void add_value(size_t);
@@ -39,6 +41,7 @@ private:
         size_t m_value{0};
         Node* m_next{nullptr};
     };
+
     size_t m_tableSize{0};
     std::vector<Node*> m_hashTable;
 };

@@ -9,7 +9,7 @@ public:
     Primes();
     Primes(size_t);
 
-    void fillArray(size_t[], size_t);
+    void fill_array(size_t[], size_t);
     void Eratosthenes();
 
 

@@ -28,29 +28,32 @@ HashTable::~HashTable()
     //dtor
 }
 
-void HashTable::init_table()
+void HashTable::rehash_table( size_t oldSize )
 {
-    m_hashTable.resize(m_tableSize);
+	m_hashTable.resize( m_tableSize );
 
-    for(size_t i = 0; i < m_hashTable.size(); i++)
-    {
-        Node* n = new Node();
-        m_hashTable[i] = n;
-    }
+	for ( size_t index = oldSize; index < m_tableSize; index++ )
+	{
+		Node* n = new Node();
+		m_hashTable[ index ] = n;
+	}
 }
+
 void HashTable::delete_table()
 {
-    for(size_t i = 0; i < m_hashTable.size(); i++)
-    {
-        delete_bucket(i);
-    }
+	for ( size_t i = 0; i < m_hashTable.size(); ++i )
+	{
+		Node* entry = m_hashTable[ i ];
 
-    for(Node* delPtr : m_hashTable)
-    {
-        delPtr->m_value = 0;
-        delPtr->m_next = nullptr;
-    }
-    m_hashTable.clear();
+		while ( entry != nullptr )
+		{
+			Node* prev = entry;
+			entry = entry->m_next;
+			delete prev;
+		}
+	}
+	
+	m_hashTable.clear();
 }
 void HashTable::delete_bucket(size_t index)
 {
@@ -63,15 +66,22 @@ void HashTable::delete_bucket(size_t index)
         delete temp;
         temp = next;
     }
+
     delete temp;
     temp = nullptr;
     next = nullptr;
 }
 
-void HashTable::set_table_size(size_t size)
+size_t HashTable::get_table_size()
 {
-    m_tableSize = size;
+	return m_tableSize;
 }
+
+void HashTable::set_table_size( size_t size_ )
+{
+	m_tableSize = size_;
+}
+
 size_t HashTable::create_hash(size_t number)
 {
     size_t index = number % m_tableSize;
@@ -87,18 +97,18 @@ void HashTable::add_values(size_t primesArray[], size_t arraySize, size_t oldSiz
     }
 }
 
-void HashTable::add_value(size_t number)
+void HashTable::add_value(size_t value)
 {
-    size_t index = create_hash(number);
+    size_t index = create_hash(value);
 
     if(m_hashTable[index]->m_value == 0 && m_hashTable[index]->m_next == nullptr)
     {
-        m_hashTable[index]->m_value = number;
+        m_hashTable[index]->m_value = value;
     }
     else
     {
         Node* temp = m_hashTable[index];
-        Node* n = new Node(number);
+        Node* n = new Node(value);
 
         while(temp->m_next != nullptr)
         {

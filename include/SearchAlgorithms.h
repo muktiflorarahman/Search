@@ -14,25 +14,21 @@ public:
     SearchAlgorithms(size_t numberOfBuckets);
     ~SearchAlgorithms();
 
-    void init();
     void search_and_time( size_t[], size_t, size_t, Results&, size_t, AlgorithmType);
-
     std::chrono::duration<double, std::milli> search_numbers(size_t[], size_t, size_t, AlgorithmType);
 
     int linear_search(size_t[], size_t, size_t);
-
     int binary_search(size_t[], size_t, size_t, size_t);
 
     void add_to_binary_search_tree(size_t[], size_t );
-
     bool binary_search_tree_find( size_t );
     void delete_binary_search_tree();
 
-
     void add_to_hash_table(size_t[], size_t, size_t );
-
+    void rehash( size_t oldSize );
     bool hash_table_lookup( size_t );
 
+    void set_hash_table_size( size_t );
     void delete_hash_table();
 
 

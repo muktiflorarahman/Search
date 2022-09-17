@@ -13,7 +13,7 @@ SearchAlgorithms::SearchAlgorithms()
 
 SearchAlgorithms::SearchAlgorithms(size_t numberOfBuckets)
 {
-    m_hashTableSize = numberOfBuckets;
+    SearchAlgorithms::m_hashTableSize = numberOfBuckets;
 
     m_hashtable = new HashTable(m_hashTableSize);
     m_binarySearchTree = new BinarySearchTree();
@@ -23,11 +23,6 @@ SearchAlgorithms::~SearchAlgorithms()
 {
     delete m_binarySearchTree;
     delete m_hashtable;
-}
-
-void SearchAlgorithms::init()
-{
-    m_hashtable->init_table();
 }
 
 std::chrono::duration<double, std::milli> SearchAlgorithms::search_numbers(size_t primesArray[], size_t arraySize, size_t searchValue, AlgorithmType algorithm)
@@ -97,19 +92,19 @@ void SearchAlgorithms::search_and_time(size_t primesArray[], size_t arraySize, s
 
     if(algorithm == AlgorithmType::HASH_TABLE)
     {
+        set_hash_table_size( arraySize );
+        rehash( oldSize );
+
         clock_t timeRequired = clock();
-        std::cout << "size of primes array: " << arraySize
-                << " Adding to hashtable" << std::endl;
+
         add_to_hash_table(primesArray, arraySize, oldSize);
 
         timeRequired = clock() - timeRequired;
-
-        std::cout << "All values have been added to the hash table. It took "
-                    << (float)timeRequired / CLOCKS_PER_SEC << std::endl;
     }
 
-  //skapar en variabel för att kunna ta tidtagning
+    // skapar en variabel för att kunna ta tidtagning
     std::chrono::duration<double, std::milli> timeTaken(0);
+
     for(size_t index = 0; index < searchRepeats; index++)
     {
         //slumpa fram ett searchValue
@@ -123,7 +118,6 @@ void SearchAlgorithms::search_and_time(size_t primesArray[], size_t arraySize, s
     {
         delete_binary_search_tree();
     }
-
 }
 
 int SearchAlgorithms::linear_search(size_t arrayToBeSearched[], size_t arraySize, size_t searchValue)
@@ -141,8 +135,8 @@ int SearchAlgorithms::linear_search(size_t arrayToBeSearched[], size_t arraySize
 
 int SearchAlgorithms::binary_search(size_t arrayToBeSearched[], size_t first, size_t last, size_t searchValue)
 {
-    std::cout << "===> First value: " << first << " last value: " << last << " search value: " << searchValue
-                << std::endl;
+    //std::cout << "===> First value: " << first << " last value: " << last << " search value: " << searchValue
+    //            << std::endl;
     if (first <= last)
     {
         //deciding middle point
@@ -186,17 +180,26 @@ void SearchAlgorithms::delete_binary_search_tree()
 {
     m_binarySearchTree->delete_tree();
 }
-//
+
+// Hashtable functions
 void SearchAlgorithms::add_to_hash_table(size_t primesArray[], size_t arraySize, size_t oldSize)
 {
     m_hashtable->add_values(primesArray, arraySize, oldSize);
-
 }
 
+void SearchAlgorithms::rehash( size_t oldSize )
+{
+    m_hashtable->rehash_table( oldSize );
+}
 
 bool SearchAlgorithms::hash_table_lookup(size_t searchValue)
 {
    return m_hashtable->retrieve_value(searchValue);
+}
+
+void SearchAlgorithms::set_hash_table_size( size_t size_ )
+{
+    m_hashtable->set_table_size( size_ );
 }
 
 void SearchAlgorithms::delete_hash_table()
