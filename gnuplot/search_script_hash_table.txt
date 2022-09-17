@@ -1,0 +1,41 @@
+set terminal pdf font "cmr"
+set output "/home/mukti/Skrivbord/gnuplot/plots/searchplot_hashtable.pdf"
+
+_DASH = " -- "
+_STD_DEV = "Standard deviation"
+
+_CONSTANT = "Constant input"
+_PRIMES = "Sequential prime numbers"
+_RANDOM = "Random input"
+_INCREASING = "Increasing input"
+_DECREASING = "Decreasing input"
+
+_IMP_QUICK = "Improved quick sort"
+_INSERTION = "Insertion sort"
+_QUICK = "Quick sort"
+_SELECTION = "Selection sort"
+_STD_SORT = "Standard sort"
+
+_LINEAR = "Linear search"
+_BINARY = "Binary search"
+_BINARY_TREE = "Binary search tree"
+_HASH_TABLE = "Hashtable"
+
+_SMOOTH = "Smoothed average N"
+
+
+# set size 1 ,2
+set key left top
+# set samples 50 , 50
+
+# set style data lines
+set xlabel "N elements"
+set ylabel "T [ ms ]"
+x = 0.0
+set title _PRIMES
+
+plot "/home/mukti/Skrivbord/gnuplot/values/search/hash_table_2000000.txt" title _STD_DEV with errorbars,\
+"" smooth csplines t _HASH_TABLE
+
+set output 
+set terminal pop
